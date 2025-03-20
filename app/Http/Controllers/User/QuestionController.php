@@ -9,10 +9,10 @@ use App\Models\Question;
 
 class QuestionController extends Controller{
     
-    function getQuestions($id = null){
+    function getQuestions($count, $page, $id = null){
 
         if($id == null){
-            $questions = Question::all();
+            $questions = Question::paginate($count, ['*'], 'page', $page);
             return response()->json([
                 "success" => "true",
                 "questions" => $questions
