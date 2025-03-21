@@ -34,6 +34,7 @@ Route::group(["prefix" => "v0.1"], function(){
     Route::group(["prefix" => "guest"], function(){
         Route::post('/login', [AuthController::class, "login"]);
         Route::post('/signup', [AuthController::class, "signup"]);
-        Route::get('/questions/{count}/{page}/{id?}', [QuestionController::class, "getQuestions"])->name("get-questions");    
+        Route::get('/questions/{count}/{page}/{id?}', [QuestionController::class, "getQuestions"])->name("get-questions");
+        Route::get('/test', [QuestionController::class, "test2"]);    
     });
 });

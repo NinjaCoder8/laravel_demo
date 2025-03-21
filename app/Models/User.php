@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,4 +32,22 @@ class User extends Authenticatable implements JWTSubject{
     public function getJWTCustomClaims(){
         return [];
     }
+
+    public function profile(){
+        return $this->hasOne(Profile::class);
+    }
+
+    public function department(){
+        return $this->belongsTo(Department::class);
+    }
+
+    public function scopeByAdmin($query){
+        return $query->where("type_id", 1);
+    }
+
+    public function scopeCreatedToday($query){
+        return $query->whereDate('created_at', Carbon::today());
+    }
+
+
 }
